@@ -12,14 +12,14 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/app.js"
+            "program": "${workspaceFolder}/bin/www"
         },
 
         {
             "name": "Launch Chrome",
             "request": "launch",
             "type": "chrome",
-            "url": "http://localhost:3080",
+            "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}"
         },
         {
