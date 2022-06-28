@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  matp:
+    image: node:16-slim #matp
+    build: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+    links:
+      - mongodb
+  mongodb: 
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - data:/data/db
+
+volumes:
+  data:
