@@ -1,4 +1,14 @@
 extends ../layout
 
+
 block content
-  h1= "this is update"
+  h1= "Modify a Product"
+  form(method='POST', action='/products/edit/'+product._id)
+    #form-group
+        label Name:
+        input.form-control(name='title', type='text', value=product.name)
+    #form-group
+        label Price:
+        input.form-control(name='price', type='text', value=product.price)
+        br
+    input.btn.btn-primary(type='submit', value='Submit')
