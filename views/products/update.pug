@@ -6,9 +6,9 @@ block content
   form(method='POST', action='/products/edit/'+product._id)
     #form-group
         label Name:
-        input.form-control(name='title', type='text', value=product.name)
+        input.form-control(name='name', type='text', value=product.name)
     #form-group
         label Price:
         input.form-control(name='price', type='text', value=product.price)
-    br
-    input.btn.btn-primary(type='submit', value='Submit')
+        br
+    input.btn.btn-primary(type='submit', name='agreement', value='Submit')

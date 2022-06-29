@@ -64,7 +64,7 @@ router.post('/add', function (req, res, next) {
 
 
 // Update route
-router.get('/edit', function (req, res) {
+router.get('/edit/:id', function (req, res) {
   Product.findById(req.params.id, function (err, product) {
     res.render('update', {
       product: product

@@ -20,6 +20,7 @@ router.get('/', function (req, res) {
   });
 });
 
+
 // Get single product
 router.get('/view/:id', function (req, res) {
   console.log(req)
@@ -51,7 +52,6 @@ router.post('/add', function (req, res, next) {
     price: req.body.price
   });
 
-
   product.save(function (err) {
     if (err) {
       res.render('error', {error:err, message:"not saved"});
@@ -64,9 +64,9 @@ router.post('/add', function (req, res, next) {
 
 
 // Update route
-router.get('/edit', function (req, res) {
+router.get('/edit/:id', function (req, res) {
   Product.findById(req.params.id, function (err, product) {
-    res.render('update', {
+    res.render('products/update', {
       product: product
     });
   });
@@ -92,7 +92,6 @@ router.post('/edit/:id', function (req, res) {
 });
 
 
-
 // Delete Route
 router.delete('/:id', function (req, res) {
   let query = { _id: req.params.id }
@@ -105,90 +104,6 @@ router.delete('/:id', function (req, res) {
     res.redirect('/');
   });
 });
-
-
-
-/*
-/* GET home page. */
-/*
-router.get('/', function(req, res, next) {
-  product.find({}, function(err, products)){
-
-    res.render('index', { title: 'Express' });
-  }
-});
-
-
-router.get('/add', function(req, res, next) {
-  try {
-      var products = await product.find() //isn't this the same as rendering?
-      //res.json(products)
-  }catch(err){
-      res.send('Error ' + err)
-  }
-  res.render('products/add', { title: 'Express' });
-});
-
-
-router.get('/add/:id', function(req, res, next) {
-  try {
-      var product = await product.findById(req.params.id) 
-      //res.json(product)
-  }catch(err){
-      res.send('Error ' + err)
-  }
-  res.render('products/add', { title: 'Express' });
-});
-
-
-router.post('/add', function(req, res, next) {
-    var Product = new product({
-      name: req.body.name,
-      price: req.body.price,
-    })
-    try{
-      var p1 = await Product.save()
-      //res.json(p1)
-    }catch(err){
-      res.send('Error')
-    }
-  res.redirect('/products', { title: 'Express' });
-});
-
-
-
-router.patch('/update/:id', function(req, res, next) {
-  try{
-    var Product = await product.findById(req.params.id)
-    Product.sub = req.body.sub
-    var p1 = await Product.save()
-    res.json(p1)
-  }catch(err){
-    res.send('Error')
-  }
-  res.render('products/update', { title: 'Express' });
-});
-
-
-
-/* router.post('/update', function(req, res, next) {
-  //
-  res.redirect('/products', { title: 'Express' });
-}); */
-
-/*
-router.delete('/delete', function(req, res, next) {
-  try{
-    var Product = await product.findById(req.params.id)
-    Product.sub = req.body.sub
-    var p1 = await Product.remove()
-    //res.json(p1)
-  }catch(err){
-    res.send('Error')
-  }
-  res.redirect('/products', { title: 'Express' });
-});
-*/
 
 module.exports = router;
 
