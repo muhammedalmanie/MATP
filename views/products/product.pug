@@ -1,0 +1,9 @@
+extends ../layout
+
+
+block content
+    h1= product.name
+    h3= product.price
+    hr
+    a.btn.btn-default(href='/products/edit/'+product._id) Edit
+     a.btn.btn-danger.delete-product(href='#', data-id=product._id) Delete

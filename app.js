@@ -37,13 +37,13 @@ app.use(bodyParser.json())
 //app.use('/css', express.static(path.resolve(__dirname, "public/stylesheets")))
 //app.use('/img', express.static(path.resolve(__dirname, "public/images")))
 //app.use('/js', express.static(path.resolve(__dirname, "public/javascript")))
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public',express.static(path.resolve(__dirname, 'public'))); // assets
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

@@ -3,7 +3,7 @@ extends ../layout
 
 block content
   h1= "All Product"
-  ul
+  ul.list-group
     each product, i in products
-        li 
-            #{product}
+        li.list-group-item
+            a(href="/products/view/"+product._id)= product.name
