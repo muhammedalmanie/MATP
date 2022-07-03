@@ -1,65 +1,39 @@
 const { application } = require('express');
 var express = require('express');
+const app = require('../../app');
 var router = express.Router();
-//var product = require('../models/product')
-let Product = require('../../models/product');
+let Store = require('../../models/stores');
 
 
 // Home Route
-router.get('/', function (req, res) {
-  Product.find().populate('productPrices.store').exec({}, function (err, products) {
+router.get('/list', function (req, res) {
+  Store.find({}, function (err, stores) {
     if (err) {
       res.json({
-        success: false,
-        error: err
+        error: true
       });
     } else {
-      res.json( {
-        success: true,
-        products: products
-      });
+      res.json(stores);
     }
   });
 });
 
-// Get single product
-router.get('/view/:id', function (req, res) {
-  console.log(req)
-  Product.findById(req.params.id, function (err, product) {
-
-    if (err) {
-      console.log(err)
-      res.render('error');
-    } else {
-      res.render('products/product', {
-        product: product
-      });
-    }
-
-  });
-});
-
-
-// Add Route
-router.get('/add', function (req, res) {
-  res.render('products/add', {
-  });
-});
 
 // Add submit POST Route
 router.post('/add', function (req, res, next) {
-  let product = new Product({
+  console.log(req)
+  let store = new Store({
     name: req.body.name,
-    price: req.body.price
+    location: req.body.location
   });
 
 
-  product.save(function (err) {
+  store.save(function (err) {
     if (err) {
-      res.render('error', {error:err, message:"not saved"});
+      res.json({error:err, success: false, message:"not saved"});
       return;
     } else {
-      res.redirect('/');
+      res.json({success: true, id: store.id});
     }
   });
 });

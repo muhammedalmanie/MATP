@@ -2,8 +2,8 @@ const { application } = require('express');
 var express = require('express');
 const app = require('../app');
 var router = express.Router();
-//var product = require('../models/product')
 let Product = require('../models/product');
+let Store = require('../models/stores');
 
 
 // Home Route
@@ -48,10 +48,17 @@ router.get('/add', function (req, res) {
 // Add submit POST Route
 router.post('/add', function (req, res, next) {
   let product = new Product({
-    name: req.body.name,
-    price: req.body.price
-  });
+    name: req.body.name, 
+    barcode: req.body.barcode,
+    description: req.body.description,
 
+  });
+  product.productPrices.push({
+    productPrice: req.body.price,
+    store: req.body.storeID
+  } );
+
+  console.log(product, req)
   product.save(function (err) {
     if (err) {
       res.render('error', {error:err, message:"not saved"});
