@@ -28,12 +28,11 @@ router.get('/view/:id', function (req, res) {
   Product.findById(req.params.id, function (err, product) {
 
     if (err) {
-      console.log(err)
-      res.render('error');
-    } else {
-      res.render('products/product', {
-        product: product
+      res.json({
+        error: true
       });
+    } else {
+      res.json(product);
     }
 
   });
@@ -42,7 +41,7 @@ router.get('/view/:id', function (req, res) {
 
 // Add Route
 router.get('/add', function (req, res) {
-  res.render('products/add', {
+  res.json('products/add', {
   });
 });
 
@@ -56,10 +55,11 @@ router.post('/add', function (req, res, next) {
 
   product.save(function (err) {
     if (err) {
-      res.render('error', {error:err, message:"not saved"});
-      return;
+      res.json({
+        error: true
+      });
     } else {
-      res.redirect('/');
+      res.json(index);
     }
   });
 });
@@ -85,10 +85,11 @@ router.post('/edit/:id', function (req, res) {
 
   Product.updateOne(query, product, function (err) {
     if (err) {
-      res.render('error');
-      return;
+      res.json({
+        error: true
+      });
     } else {
-      res.redirect('/');
+      res.json(index);
     }
   });
 });
@@ -101,10 +102,12 @@ router.delete('/:id', function (req, res) {
 
   Product.remove(query, function (err) {
     if (err) {
-      res.render('error');
-      return;
+      res.json({
+        error: true
+      });
+    } else {
+      res.json(index);
     }
-    res.redirect('/');
   });
 });
 

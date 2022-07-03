@@ -42,7 +42,7 @@ router.post('/add', function (req, res, next) {
 // Update route
 router.get('/edit/:id', function (req, res) {
   Product.findById(req.params.id, function (err, product) {
-    res.render('update', {
+    res.json('update', {
       product: product
     });
   });
@@ -58,11 +58,13 @@ router.post('/edit/:id', function (req, res) {
   let query = { _id: req.params.id }
 
   Product.updateOne(query, product, function (err) {
+
     if (err) {
-      res.render('error');
-      return;
+      res.json({
+        error: true
+      });
     } else {
-      res.redirect('/');
+      res.json(index);
     }
   });
 });
@@ -75,10 +77,12 @@ router.delete('/:id', function (req, res) {
 
   Product.remove(query, function (err) {
     if (err) {
-      res.render('error');
-      return;
+      res.json({
+        error: true
+      });
+    } else {
+      res.json(index);
     }
-    res.redirect('/');
   });
 });
 
