@@ -3,7 +3,13 @@ extends ../layout
 
 block content
     h1= product.name
-    h3= product.price
+    //h3= product.price
+    textfeild= 
+    h2= storeName
+    h2= storeLocation
+    h2= productPrice
+    h2= productAvailability
+    h2= priceDate
     hr
     a.btn.btn-default(href='/products/edit/'+product._id) Edit
      a.btn.btn-danger.delete-product(href='#', data-id=product._id) Delete
