@@ -48,43 +48,7 @@ router.get('/edit/:id', function (req, res) {
   });
 });
 
-// Update submit POST Route
-router.post('/edit/:id', function (req, res) {
 
-  let product = {};
-  product.name = req.body.name;
-  product.price = req.body.price;
-
-  let query = { _id: req.params.id }
-
-  Product.updateOne(query, product, function (err) {
-
-    if (err) {
-      res.json({
-        error: true
-      });
-    } else {
-      res.json(index);
-    }
-  });
-});
-
-
-
-// Delete Route
-router.delete('/:id', function (req, res) {
-  let query = { _id: req.params.id }
-
-  Product.remove(query, function (err) {
-    if (err) {
-      res.json({
-        error: true
-      });
-    } else {
-      res.json(index);
-    }
-  });
-});
 
 
 module.exports = router;

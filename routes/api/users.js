@@ -48,9 +48,9 @@ router.post('/add', function (req, res, next) {
 
 // Update route
 router.get('/edit/:id', function (req, res) {
-    Product.findById(req.params.id, function (err, product) {
+    User.findById(req.params.id, function (err, user) {
         res.render('update', {
-            product: product
+            user: user
         });
     });
 });
@@ -58,13 +58,12 @@ router.get('/edit/:id', function (req, res) {
 // Update submit POST Route
 router.post('/edit/:id', function (req, res) {
 
-    let product = {};
-    product.name = req.body.name;
-    product.price = req.body.price;
+    let user = {};
+    user.name = req.body.name;
 
     let query = { _id: req.params.id }
 
-    Product.updateOne(query, product, function (err) {
+    User.updateOne(query, user, function (err) {
         if (err) {
             res.render('error');
             return;
@@ -75,19 +74,6 @@ router.post('/edit/:id', function (req, res) {
 });
 
 
-
-// Delete Route
-router.delete('/:id', function (req, res) {
-    let query = { _id: req.params.id }
-
-    Product.remove(query, function (err) {
-        if (err) {
-            res.render('error');
-            return;
-        }
-        res.redirect('/');
-    });
-});
 
 
 module.exports = router;

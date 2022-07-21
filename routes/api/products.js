@@ -97,16 +97,19 @@ router.post('/edit/:id', function (req, res) {
 
 
 // Delete Route
-router.delete('/:id', function (req, res) {
-  let query = { _id: req.params.id }
-
-  Product.remove(query, function (err) {
+router.delete('/', function (req, res) {
+  let query = { _id: req.query.id }
+  console.log(req);
+  Product.deleteOne(query, function (err,rest) {
+    console.log(err,rest);
     if (err) {
       res.json({
         error: true
       });
     } else {
-      res.json(index);
+      res.json({
+        error: false
+      });
     }
   });
 });

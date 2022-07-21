@@ -100,10 +100,10 @@ router.post('/edit/:id', function (req, res) {
 
 
 // Delete Route
-router.delete('/:id', function (req, res) {
+router.delete('/delete', function (req, res) {
   let query = { _id: req.params.id }
 
-  Product.remove(query, function (err) {
+  Product.deleteOne(query, function (err) {
     if (err) {
       res.render('error');
       return;

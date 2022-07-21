@@ -20,7 +20,6 @@ router.get('/list', function (req, res) {
 
 
 
-
 // Add submit POST Route
 router.post('/add', function (req, res, next) {
   console.log(req)
@@ -43,9 +42,9 @@ router.post('/add', function (req, res, next) {
 
 // Update route
 router.get('/edit/:id', function (req, res) {
-  Product.findById(req.params.id, function (err, product) {
-    res.render('update', {
-      product: product
+    UserList.findById(req.params.id, function (err, userList) {
+    res.json({success: true,
+        userList: userList
     });
   });
 });
@@ -53,13 +52,12 @@ router.get('/edit/:id', function (req, res) {
 // Update submit POST Route
 router.post('/edit/:id', function (req, res) {
 
-  let product = {};
-  product.name = req.body.name;
-  product.price = req.body.price;
+  let userList = {};
+  userList.name = req.body.name;
 
   let query = { _id: req.params.id }
 
-  Product.updateOne(query, product, function (err) {
+  UserList.updateOne(query, userList, function (err) {
     if (err) {
       res.render('error');
       return;
@@ -75,7 +73,7 @@ router.post('/edit/:id', function (req, res) {
 router.delete('/:id', function (req, res) {
   let query = { _id: req.params.id }
 
-  Product.remove(query, function (err) {
+  UserList.remove(query, function (err) {
     if (err) {
       res.render('error');
       return;
