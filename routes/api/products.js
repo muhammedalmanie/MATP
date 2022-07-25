@@ -49,17 +49,22 @@ router.get('/add', function (req, res) {
 router.post('/add', function (req, res, next) {
   let product = new Product({
     name: req.body.name,
-    price: req.body.price
+    price: req.body.price,
+    barcode: req.body.barcode,
+    storeID: req.body.storeID,
+    description: req.body.description,
+
   });
 
 
   product.save(function (err) {
     if (err) {
       res.json({
-        error: true
+        error: true,
+        message:err.message
       });
     } else {
-      res.json(index);
+      res.json({error: false});
     }
   });
 });
