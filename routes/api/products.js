@@ -71,30 +71,36 @@ router.post('/add', function (req, res, next) {
 
 
 // Update route
-router.get('/edit/:id', function (req, res) {
+router.get('/edit/', function (req, res) {
   Product.findById(req.params.id, function (err, product) {
-    res.render('update', {
+    res.json('update', {
       product: product
     });
   });
 });
 
 // Update submit POST Route
-router.post('/edit/:id', function (req, res) {
+router.post('/edit/', function (req, res) {
 
   let product = {};
   product.name = req.body.name;
   product.price = req.body.price;
+  product.barcode = req.body.barcode,
+  product.storeID = req.body.storeID,
+  product.description = req.body.description,
 
-  let query = { _id: req.params.id }
+  query = { _id: req.query.id }
 
   Product.updateOne(query, product, function (err) {
+    console.log(err);
     if (err) {
       res.json({
         error: true
       });
     } else {
-      res.json(index);
+      res.json({
+        error: false
+      });
     }
   });
 });
