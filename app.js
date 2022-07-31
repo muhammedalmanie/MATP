@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 
+var testController = require('./controller/test-controller');
+const keycloak = require('./config/keycloak-config.js').initKeycloak();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -35,6 +37,7 @@ app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
+app.use(keycloak.middleware());
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -48,6 +51,7 @@ app.use('/products', productsRouter);
 app.use('/api/stores', storesRouter);
 app.use('/api/products', productsAPIRouter);
 app.use('/api/users', usersAPIRouter);
+app.use('/test', testController);
 
 
 // catch 404 and forward to error handler
