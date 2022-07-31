@@ -23,7 +23,7 @@ router.get('/', function (req, res) {
 });
 
 // Get single product
-router.get('/view/:id', function (req, res) {
+router.get('/view/:id',keycloak.protect('user'), function (req, res) {
   console.log(req)
   Product.findById(req.params.id, function (err, product) {
 
@@ -104,6 +104,7 @@ router.post('/edit/', function (req, res) {
     }
   });
 });
+
 
 
 
