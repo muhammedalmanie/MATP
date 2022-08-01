@@ -4,9 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+//const session = require('express-session');
+//const Keycloak = require('keycloak-connect');
+
 
 var testController = require('./controller/test-controller');
-const keycloak = require('./config/keycloak-config.js').initKeycloak();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -37,6 +39,11 @@ app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
+
+console.log("before");
+const keycloak = require('./config/keycloak-config').initKeycloak();
+console.log("after");
+
 app.use(keycloak.middleware());
 
 app.use(logger('dev'));
