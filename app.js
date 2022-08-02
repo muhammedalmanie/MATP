@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 //const session = require('express-session');
 //const Keycloak = require('keycloak-connect');
 
-
+const keycloak = require('./config/keycloak-config').initKeycloak();
 var testController = require('./controller/test-controller');
 
 var indexRouter = require('./routes/index');
@@ -41,7 +41,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 console.log("before");
-const keycloak = require('./config/keycloak-config').initKeycloak();
+// const keycloak = require('./config/keycloak-config').initKeycloak();
 console.log("after");
 
 app.use(keycloak.middleware());

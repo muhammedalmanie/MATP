@@ -3,6 +3,8 @@ var express = require('express');
 var router = express.Router();
 //var product = require('../models/product')
 let Product = require('../../models/product');
+const keycloak = require('../../config/keycloak-config').initKeycloak();
+
 
 
 // Home Route
