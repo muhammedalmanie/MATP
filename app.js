@@ -38,13 +38,13 @@ app.set('view engine', 'pug');
 // Body Parser Middleware
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json()) 
 
 console.log("before");
 // const keycloak = require('./config/keycloak-config').initKeycloak();
 console.log("after");
 
-app.use(keycloak.middleware());
+// app.use(keycloak.middleware());  ////////////////////////////
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -75,6 +75,10 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+app.get('/', function(req, res){
+  res.send("Server is up!");
 });
 
 module.exports = app;
