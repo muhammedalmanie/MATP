@@ -7,15 +7,19 @@ router.get('/anonymous', function(req, res){
     res.send("Hello Anonymous");
 });
 
-router.get('/user', keycloak.protect('user'), function(req, res){
+router.get('/user', keycloak.protect('user', {response_mode: 'token'}), function(req, res){
+    const token = req.kauth.grant.access_token.content;
+console.log(req)
+console.log(token)
     res.send("Hello User");
+
 });
 
-router.get('/admin', keycloak.protect('admin'), function(req, res){
+router.get('/admin', keycloak.enforcer('admin', {response_mode: 'token'}), function(req, res){
     res.send("Hello Admin");
 });
 
-router.get('/all-user', keycloak.protect(['user','admin']), function(req, res){
+router.get('/all-user', keycloak.enforcer(['user','admin'], {response_mode: 'token'}), function(req, res){
     res.send("Hello All User");
 });
 
