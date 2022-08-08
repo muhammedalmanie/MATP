@@ -7,6 +7,31 @@ var bodyParser = require('body-parser');
 //const session = require('express-session');
 //const Keycloak = require('keycloak-connect');
 
+
+// import KcAdminClient from 'keycloak-admin'
+
+// const adminClient = new KcAdminClient({
+//     baseUrl: 'http://localhost:8080/auth',
+//     realmName: 'hexadefence'
+// })
+
+// let execute = async function () {
+
+//     await adminClient.auth({
+//         username: 'user1',
+//         password: '123',
+//         grantType: 'password',
+//         clientId: 'MATP'
+//     })
+
+//     const users = await adminClient.users.find();
+
+//     console.log(users)
+// }
+
+// execute();
+
+
 const keycloak = require('./config/keycloak-config').initKeycloak();
 var testController = require('./controller/test-controller');
 
