@@ -4,8 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
-//const session = require('express-session');
-//const Keycloak = require('keycloak-connect');
 
 
 // import KcAdminClient from 'keycloak-admin'
@@ -69,7 +67,7 @@ console.log("before");
 // const keycloak = require('./config/keycloak-config').initKeycloak();
 console.log("after");
 
-// app.use(keycloak.middleware());  ////////////////////////////
+app.use(keycloak.middleware());  ////////////////////////////
 
 app.use(logger('dev'));
 app.use(express.json());
