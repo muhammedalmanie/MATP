@@ -65,9 +65,10 @@ app.use(bodyParser.json())
 
 console.log("before");
 // const keycloak = require('./config/keycloak-config').initKeycloak();
-console.log("after");
 
-app.use(keycloak.middleware());  ////////////////////////////
+
+//app.use(keycloak.middleware());  ////////////////////////////
+console.log("after");
 
 app.use(logger('dev'));
 app.use(express.json());

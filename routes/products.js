@@ -3,7 +3,6 @@ var express = require('express');
 const app = require('../app');
 var router = express.Router();
 let Product = require('../models/product');
-let Store = require('../models/stores');
 
 
 // Home Route
